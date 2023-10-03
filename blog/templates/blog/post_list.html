@@ -1,29 +1,13 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Benno's Blog</title>
-    </head>
-    <body>
-        <header>
-            <h1><a href="/">LBenno's Super Cool Blog</a></h1>
-        </header>
-        {% for post in posts %} 
-            <article>
-                <time>published: {{ post.published_date }} </time>
-                <h2><a href="">{{ post.title }} </a></h2>
-                <p>{{ post.text|linebreaksbr }} </p>
-            </article>
-        {% endfor %}
-    </body>
-</html>
+{% extends 'blog/base.html' %}
 
-
-
-
-<!-- 
-<article>
-    <time>published: 03.10.2023</time>
-    <h2><a href="">A second post OMG!</a></h2>
-    <p>Yes it's true; I did it a second time.  What a smartypants I am.  My mate Mic will be so proud :-&#41;  And did you know that smiley face was created using an escape character... not an exit character.... that's only for German rooms. #insidejoke</p>
-</article> 
--->
+{% block content %}
+    {% for post in posts %}   
+        <article class="post">
+            <time class="date">
+                {{ post.published_date }}
+            </time>
+            <h2><a href="{% url 'post_detail' pk=post.pk %}">{{ post.title }}</a></h2>
+            <p>{{ post.text|linebreaksbr }}</p>
+        </article>
+    {% endfor %}
+{% endblock %}
